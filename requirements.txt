@@ -1,0 +1,8 @@
+aiogram==2.25.1
+aiofiles==24.1.0
+requests==2.32.3
+uvicorn==0.30.5
+fastapi==0.112.0
+pillow==10.4.0
+SQLAlchemy==2.0.32
+pymysql==1.1.1
