@@ -20,7 +20,7 @@ async def read_item(id: int, db: Session = Depends(get_db)):
     db.add(new_item)
     db.commit()
     db.refresh(new_item)
-    return {"id": new_item.id, "value": new_item.value}
+    return {"id": new_item.id, "value": new_item.onewin_id}
 
 
 if __name__ == "__main__":

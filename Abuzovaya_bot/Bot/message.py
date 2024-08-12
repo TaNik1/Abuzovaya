@@ -23,25 +23,35 @@ async def send_start_message(chat_id):
 
 async def send_main_message(chat_id):
     keyboard = InlineKeyboardMarkup(row_width=1)
-    keyboard.add(InlineKeyboardButton(text="🔑Регистрация 1WIN🔑", url="https://telegra.ph/Registraciya-1WIN-07-28"))
+    keyboard.add(InlineKeyboardButton(text="💣Mines💣", callback_data="game_mines"))
+
+    message_text = (
+        "<b>📌МЕНЮ📌</b>\n\n"
+        "<blockquote>Мы - команда по разработке схем, для обхода игр в онлайн казино. На данный момент мы с "
+        "уверенностью можем продемонстрировать софт для следующих игр:</blockquote>\n\n"
+        "<b>💣Mines💣</b>-📜<a href='https://telegra.ph/Instrukciya-07-28-9'>ИНСТРУКЦИЯ</a>📜\n"
+        "<tg-spoiler><i>⏳Coming soon...</i></tg-spoiler>\n\n"
+        "<b>✅Ваша цель - следовать инструкциям и заработать свой первый кеш у нас!</b>\n"
+        "📚<b>Обязательно читайте инструкции к играм</b>\n\n"
+        "❇️Выбирайте <b>Игру</b> 👇🏻\n"
+        "❇️Потом читайте <b>Инструкцию</b> 👇🏻\n"
+        "❇️И приступайте к игре по <b>Сигналам</b> 👇🏻"
+    )
+    async with aiofiles.open("src/image/img1.jpg", 'rb') as photo:
+        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+
+
+async def send_mines_message(chat_id):
+    keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="📜Инструкция📜", url="https://telegra.ph/Instrukciya-07-28-9"))
     keyboard.add(InlineKeyboardButton(text="📦Выдать схему📦", callback_data="scheme"))
 
     message_text = (
-        "<b>📌 МЕНЮ 📌</b>\n\n"
-        "⚠️ Для корректной работы софта, у вас должен быть Новый аккаунт 1win. В ином случае вы <b>не сможете получить бонус +500%</b> к первому депозиту. "
-        "<a href='https://telegra.ph/Registraciya-1WIN-07-28'>🔑Регистрация 1WIN🔑</a>\n\n"
-        "⚠️ Что бы играть без риска, обязательно изучите Инструкцию. "
-        "<a href='https://telegra.ph/Instrukciya-07-28-9'>📜Инструкция📜</a>\n\n"
-        "⚠️ Важно следовать всем данным вам инструкциям, при которых вероятность победы максимальна!\n\n"
-        "👉🏻 Мы - команда по разработке схем, для обхода игр в онлайн казино. На данный момент мы с уверенностью можем продемонстрировать софт для игры Mines на 1win.\n\n"
-        "👉🏻 Mines - это гемблинг игра в букмекерской конторе 1win, которая основывается на класической игре Сапёр.\n\n"
-        "<b>✅ Ваша цель - следовать инструкциям и заработать свой первый кеш у нас!</b>\n\n"
-        "❇️ Начинай с <b>Регистрации 👇🏻</b>\n"
-        "❇️ Потом читай <b>Инструкцию 👇🏻</b>\n"
-        "❇️ И приступай к игре по <b>Схемам 👇🏻</b>"
+        "<b>💣Mines💣</b>\n\n"
+        "<b>✅Mines - это гемблинг игра в букмекерской конторе 1win, которая основывается на классической игре Сапёр✅</b>\n\n"
+        "<b>🤝Успехов!🤝</b>"
     )
-    async with aiofiles.open("src/image/img1.jpg", 'rb') as photo:
+    async with aiofiles.open("src/image/img8.jpg", 'rb') as photo:
         await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
 
 

@@ -9,17 +9,24 @@ from aiogram.utils.exceptions import BadRequest
 from .States import CreateUser
 from .message import send_main_message, send_select_scheme_message, \
     send_scheme_message, send_start_message, send_join_request_message, \
-    send_select_coefficient_message, send_check_registration
+    send_select_coefficient_message, send_check_registration, send_mines_message
 
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     user_id = message.from_user.id
     member = await bot.get_chat_member(chat_id=channel_id, user_id=user_id)
-    if member.is_chat_member():
-        await send_main_message(user_id)
-    else:
-        await send_start_message(user_id)
+    db = SessionLocal()
+    try:
+        user = db.query(Item).filter(Item.tg_id == user_id).first()
+        if member.is_chat_member() and user is not None:
+            await send_main_message(user_id)
+        elif member.is_chat_member():
+            await send_check_registration(user_id)
+        else:
+            await send_start_message(user_id)
+    finally:
+        db.close()
 
 
 @dp.callback_query_handler(filters.Text(equals="check_subscription"))
@@ -62,6 +69,12 @@ async def process_mine_selection(callback_query: types.CallbackQuery):
     await send_scheme_message(user_id, callback_query.data)
 
 
+@dp.callback_query_handler(filters.Text(equals="game_mines"))
+async def process_mine_selection(callback_query: types.CallbackQuery):
+    user_id = callback_query.from_user.id
+    await send_mines_message(user_id)
+
+
 @dp.chat_join_request_handler()
 async def join_request(update: types.ChatJoinRequest):
     user_id = update.from_user.id
@@ -73,10 +86,17 @@ async def join_request(update: types.ChatJoinRequest):
 async def check_id(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     db = SessionLocal()
-    exists = db.query(Item).filter(Item.id == int(message.text)).first() is not None
-    db.close()
-    if exists:
-        await state.finish()
-        await send_main_message(user_id)
-    else:
-        await bot.send_message(user_id, "id не найден")
+    try:
+        user = db.query(Item).filter(Item.onewin_id == int(message.text)).first()
+        if user is None:
+            await bot.send_message(user_id, "id не найден")
+        else:
+            if user.tg_id is None:
+                user.tg_id = user_id
+                db.commit()
+                await state.finish()
+                await send_main_message(user_id)
+            else:
+                await bot.send_message(user_id, "Данный id уже используется")
+    finally:
+        db.close()
