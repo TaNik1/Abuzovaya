@@ -1,7 +1,7 @@
 from .bot import bot
 from .States import CreateUser
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from ..utils.GridGenerator import GridGenerator
+from .utils.GridGenerator import GridGenerator
 import aiofiles
 from io import BytesIO
 
@@ -27,8 +27,8 @@ async def send_main_message(chat_id):
 
     message_text = (
         "<b>📌МЕНЮ📌</b>\n\n"
-        "<blockquote>Мы - команда по разработке схем, для обхода игр в онлайн казино. На данный момент мы с "
-        "уверенностью можем продемонстрировать софт для следующих игр:</blockquote>\n\n"
+        "<i><blockquote>Мы - команда по разработке схем, для обхода игр в онлайн казино. На данный момент мы с "
+        "уверенностью можем продемонстрировать софт для следующих игр:</blockquote></i>\n\n"
         "<b>💣Mines💣</b>-📜<a href='https://telegra.ph/Instrukciya-07-28-9'>ИНСТРУКЦИЯ</a>📜\n"
         "<tg-spoiler><i>⏳Coming soon...</i></tg-spoiler>\n\n"
         "<b>✅Ваша цель - следовать инструкциям и заработать свой первый кеш у нас!</b>\n"
