@@ -1,5 +1,5 @@
 from sqlalchemy import Column, BigInteger, Integer
-from .database import Base
+from .database import Base, engine
 
 
 class Item(Base):
@@ -8,3 +8,5 @@ class Item(Base):
     onewin_id = Column(BigInteger, nullable=False)
     tg_id = Column(BigInteger, nullable=True)
 
+
+Base.metadata.create_all(bind=engine)
