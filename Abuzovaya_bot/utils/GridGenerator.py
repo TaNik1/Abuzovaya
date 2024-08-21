@@ -10,8 +10,8 @@ class GridGenerator:
         self.cell_size = 114  # Size of each cell in pixels (will adjust based on the images)
 
         # Load images
-        self.background = Image.open(os.path.join("./src/image/fragments", 'background.png')).convert("RGBA")
-        self.frame = Image.open(os.path.join("./src/image/fragments", 'frame.png')).convert("RGBA")
+        self.background = Image.open(os.path.join("../src/image/fragments", 'background.png')).convert("RGBA")
+        self.frame = Image.open(os.path.join("../src/image/fragments", 'frame.png')).convert("RGBA")
 
     def generate_grid(self):
         # Create a new image for the grid
@@ -27,12 +27,12 @@ class GridGenerator:
                 x = i * self.cell_size + 21
                 y = j * self.cell_size + 21
                 if (i, j) in star_positions:
-                    star = Image.open(os.path.join("./src/image/fragments",
+                    star = Image.open(os.path.join("../src/image/fragments",
                                                    f'звезды_{0 if i * 5 + j + 1 < 10 else ""}{i * 5 + j + 1}.jpg')).convert(
                         "RGBA")
                     grid_img.paste(star, (x, y), star)  # No mask needed for star
                 else:
-                    square = Image.open(os.path.join("./src/image/fragments",
+                    square = Image.open(os.path.join("../src/image/fragments",
                                                      f'Квадрат_{0 if i * 5 + j + 1 < 10 else ""}{i * 5 + j + 1}.jpg')).convert(
                         "RGBA")
                     grid_img.paste(square, (x, y), square)  # No mask needed for square

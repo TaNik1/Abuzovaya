@@ -1,7 +1,7 @@
 from .bot import bot
 from .States import CreateUser
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from .utils.GridGenerator import GridGenerator
+from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 import aiofiles
 from io import BytesIO
 
@@ -17,41 +17,84 @@ async def send_start_message(chat_id):
         "https://t.me/+NBZaJjasSl02MmY6\n"
         "https://t.me/+NBZaJjasSl02MmY6\n"
     )
-    async with aiofiles.open("src/image/img5.jpg", 'rb') as photo:
+    async with aiofiles.open("../src/image/img6.jpg", 'rb') as photo:
         await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
 
 
 async def send_main_message(chat_id):
-    keyboard = InlineKeyboardMarkup(row_width=1)
-    keyboard.add(InlineKeyboardButton(text="💣Mines💣", callback_data="game_mines"))
+    keyboard = InlineKeyboardMarkup(row_width=3)
+    keyboard.add(InlineKeyboardButton(text="💣Mines💣", callback_data="game_mines"),
+                 InlineKeyboardButton(text="🚀Coming Soon...", callback_data="coming_soon"),
+                 InlineKeyboardButton(text="🚀⭕️Coming Soon...", callback_data="coming_soon"),
+                 InlineKeyboardButton(text="🚀⭕️Coming Soon...", callback_data="coming_soon"),
+                 InlineKeyboardButton(text="🚀⭕️Coming Soon...", callback_data="coming_soon"),
+                 InlineKeyboardButton(text="🚀⭕️Coming Soon...", callback_data="coming_soon")
+                 )
 
     message_text = (
-        "<b>📌МЕНЮ📌</b>\n\n"
-        "<i><blockquote>Мы - команда по разработке схем, для обхода игр в онлайн казино. На данный момент мы с "
-        "уверенностью можем продемонстрировать софт для следующих игр:</blockquote></i>\n\n"
-        "<b>💣Mines💣</b>-📜<a href='https://telegra.ph/Instrukciya-07-28-9'>ИНСТРУКЦИЯ</a>📜\n"
-        "<tg-spoiler><i>⏳Coming soon...</i></tg-spoiler>\n\n"
-        "<b>✅Ваша цель - следовать инструкциям и заработать свой первый кеш у нас!</b>\n"
-        "📚<b>Обязательно читайте инструкции к играм</b>\n\n"
-        "❇️Выбирайте <b>Игру</b> 👇🏻\n"
-        "❇️Потом читайте <b>Инструкцию</b> 👇🏻\n"
-        "❇️И приступайте к игре по <b>Сигналам</b> 👇🏻"
+        "🎮 Выберите Игру 🎮"
     )
-    async with aiofiles.open("src/image/img1.jpg", 'rb') as photo:
+    async with aiofiles.open("../src/image/img1.jpg", 'rb') as photo:
         await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
 
 
 async def send_mines_message(chat_id):
     keyboard = InlineKeyboardMarkup(row_width=1)
-    keyboard.add(InlineKeyboardButton(text="📜Инструкция📜", url="https://telegra.ph/Instrukciya-07-28-9"))
-    keyboard.add(InlineKeyboardButton(text="📦Выдать схему📦", callback_data="scheme"))
-
+    keyboard.add(InlineKeyboardButton(text="🔥Получить сигнал🔥", callback_data="scheme"))
+    keyboard.add(InlineKeyboardButton(text="📜Инструкция📜", callback_data="instruction"))
+    keyboard.add(InlineKeyboardButton(text="💻Регистрация 1win💻", callback_data="registration"))
+    keyboard.add(InlineKeyboardButton(text="🎮Изменить игру🎮", callback_data="menu"))
     message_text = (
-        "<b>💣Mines💣</b>\n\n"
-        "<b>✅Mines - это гемблинг игра в букмекерской конторе 1win, которая основывается на классической игре Сапёр✅</b>\n\n"
-        "<b>🤝Успехов!🤝</b>"
+        "👋🏻Добро пожаловать в <b>💣Mines💣</b>\n\n"
+        "<b>💣Mines</b> - это гемблинг игра от 1win, основанная на классической игре Сапёр."
+        "В ней вам предстоит - открывать безопасные ячейки и не попадаться на мины!\n\n"
+        "🔍Доступное кол-во мин: <b>1, 3, 5, 7</b>\n"
+        "💯Доступные коэф.: <b>1.84 - 3.41</b>\n"
+        "📊Точность сигнала = <b>92%</b>\n\n"
+        "🆘Есть вопрос? Ответим - @ABUZOVAYA_Admin\n\n"
+        "<b>🔥Начнем?👇🏻</b>"
     )
-    async with aiofiles.open("src/image/img8.jpg", 'rb') as photo:
+    async with aiofiles.open("../src/image/img2.jpg", 'rb') as photo:
+        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+
+
+async def send_registration_message(chat_id):
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard.add(InlineKeyboardButton(text="💻1WIN💻", url="https://1wcght.life/casino/list?open=register&p=cnk5"))
+    keyboard.add(InlineKeyboardButton(text="🔍Проверить ID🔍", callback_data="check_registration"))
+    keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
+    message_text = (
+        "<b>💻Регистрация 1win💻</b>\n\n"
+        "1️⃣Для начала зарегистрируйтесь на сайте, нажав на кнопку\n<b>💻1WIN💻</b>\n"
+        "⚠️Для работы Боту нужен Новый Аккаунт 1win, что бы иметь доступ к внутренней статистике системы\n\n"
+        "2️⃣Введите промокод ABUZOVAYA, он даст вам +500 % к первому депозиту\n\n"
+        "3️⃣После успешной регистрации - ваша учетная запись будет автоматически проверена системой, "
+        "и вы получите сообщение в боте об успешной регистрации\n"
+        "⚠️Если вы зарегистрировались, но не получили сообщение, вы можете вручную проверить свой ID\n\n"
+        "🆘Если вопросы, проблемы? Обращайтесь - @ ABUZOVAYA_Admin"
+    )
+    async with aiofiles.open("../src/image/img3.jpg", 'rb') as photo:
+        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+
+
+async def send_instruction_message(chat_id):
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
+    message_text = (
+        "<b>📜Инструкция📜</b>\n\n\n\n"
+        "1️⃣Пройдите регистрацию <b>1win</b> и введите промокод <b>ABUZOVAYA</b> что бы получить <b>+500%</b> "
+        "к первому депозиту\n\n"
+        "2️⃣На сайте, перейдите в раздел <b>Казино - 1win games -\n💣MINES💣</b>\n\n"
+        "3️⃣Нажимаете <b>🔥Получить сигнал🔥</b>\n\n"
+        "4️⃣Выбирите <b>💣кол-во мин💣</b>\n\n"
+        "5️⃣Выбирите <b>💯Коэффициент💯</b>\n\n"
+        "6️⃣Ура! Вы получили свой первый сигнал! <b>Отыграйте поле в соответствии с Сигналом бота</b>\n\n"
+        "<b>7️⃣Лутайте бабки💎</b>\n\n"
+        "8️⃣Нажимайте <b>🔥Новый сигнал🔥</b> и лутаете еще раз!\n"
+        "<b>⚠️Не рекомендуем играть больше 10 игр в день!</b>\n\n\n\n"
+        "🆘Если вопросы, проблемы? Обращайтесь -\n@ABUZOVAYA_Admin"
+    )
+    async with aiofiles.open("../src/image/img5.jpg", 'rb') as photo:
         await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
 
 
@@ -63,7 +106,7 @@ async def send_select_scheme_message(chat_id):
     keyboard.add(InlineKeyboardButton(text="7💣", callback_data="mine_7"))
 
     message_text = (
-        "<b>✅Выберите кол-во мин ❌</b>"
+        "<b>✅Выберите кол-во мин:</b>"
     )
     await bot.send_message(chat_id, message_text, reply_markup=keyboard)
 
@@ -105,10 +148,10 @@ async def send_scheme_message(chat_id, stars):
     stars_count = int(stars.split("_")[1])
 
     keyboard = InlineKeyboardMarkup(row_width=1)
-    keyboard.add(InlineKeyboardButton(text="✅Забрать схему✅", callback_data=stars))
+    keyboard.add(InlineKeyboardButton(text="🔥Новый сигнал🔥", callback_data=stars))
     keyboard.add(InlineKeyboardButton(text="💣Изменить кол-во мин💣", callback_data="scheme"))
     keyboard.add(InlineKeyboardButton(text="💯Изменить коэффициент💯", callback_data=type_scheme))
-    keyboard.add(InlineKeyboardButton(text="📌МЕНЮ📌", callback_data="menu"))
+    keyboard.add(InlineKeyboardButton(text="🚫EXIT🚫", callback_data="menu"))
 
     image = GridGenerator(stars_count).generate_grid()
     file = BytesIO()
@@ -117,26 +160,10 @@ async def send_scheme_message(chat_id, stars):
     await bot.send_photo(chat_id, file, reply_markup=keyboard)
 
 
-async def send_join_request_message(chat_id):
-    keyboard = InlineKeyboardMarkup(row_width=1)
-    keyboard.add(InlineKeyboardButton(text="📌МЕНЮ📌", callback_data="menu"))
-
-    message_text = (
-        "<b>👋🏻Привет!👋🏻</b>\n\n"
-        "⭐️Я - Бот канала <a href='https://t.me/+NBZaJjasSl02MmY6'> АБУЗОВАЯ КАЗИНО</a>⭐️\n"
-        "⭐️Меня создали, что бы дать тебе Сигналы для заработка на 1win⭐️\n\n"
-    )
-    async with aiofiles.open("src/image/img6.jpg", 'rb') as photo:
-        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
-    await send_check_registration(chat_id)
-
-
 async def send_check_registration(chat_id):
     message_text = (
-        "<b>⚠️ Для корректной работы софта, Боту необходимо привязаться к аккаунту 1win.Без этого работа сигналов - невозможна ⚠️</b>\n\n"
-        "<b><a href='https://telegra.ph/Registraciya-1WIN-07-28'>🔑Регистрация 1WIN🔑</a></b>\n\n"
-        "<b>✅ Введите ID из 8 цифр: ✅</b>"
+        "<b>✅ Введите ID аккаунта 1win из 8 цифр:</b>"
     )
-    async with aiofiles.open("src/image/img7.jpg", 'rb') as photo:
+    async with aiofiles.open("../src/image/img4.jpg", 'rb') as photo:
         await bot.send_photo(chat_id, photo, caption=message_text)
     await CreateUser.waiting_id.set()
