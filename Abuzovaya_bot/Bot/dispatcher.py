@@ -116,10 +116,13 @@ async def process_stars_selection(callback_query: types.CallbackQuery):
 
 
 @dp.callback_query_handler(filters.Text(equals="game_mines"))
+async def select_mines_game(callback_query: types.CallbackQuery):
+    user_id = callback_query.from_user.id
+    await send_mines_message(user_id, message_id=callback_query.message.message_id)
+
+
+@dp.callback_query_handler(filters.Text(equals="game_mines"), state=CreateUser.waiting_id)
 async def select_mines_game(callback_query: types.CallbackQuery, state: FSMContext):
     user_id = callback_query.from_user.id
     await send_mines_message(user_id, message_id=callback_query.message.message_id)
-    current_state = await state.get_state()
-
-    if current_state == CreateUser.waiting_id:
-        await state.finish()
+    await state.finish()
