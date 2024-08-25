@@ -17,20 +17,17 @@ async def send_subscription_message(chat_id, inline_message_id=None):
         "👉🏻@ABUZOVAYA_K\n"
         "👉🏻@ABUZOVAYA_K\n"
     )
-    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg")
 
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg")
     try:
         if inline_message_id:
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
             await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
         else:
-            # Если inline_message_id не передан, просто отправляем новое сообщение
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
-        # Если редактирование не удалось, отправляем новое фото
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
 
-        # Удаляем предыдущее сообщение, если оно существует
         if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -48,13 +45,18 @@ async def send_main_message(chat_id, inline_message_id=None):
     message_text = (
         "🎮 Выберите Игру 🎮"
     )
-    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img1.jpg", 'rb') as photo:
-        photo = InputMediaPhoto(photo, caption=message_text)
-        try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
-                                         reply_markup=keyboard)
-        except (MessageIdentifierNotSpecified, BadRequest):
-            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
+
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img1.jpg")
+    try:
+        if inline_message_id:
+            media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+        else:
+            await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+
+        if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -74,13 +76,18 @@ async def send_mines_message(chat_id, inline_message_id=None):
         "🆘Есть вопрос? Ответим - @ABUZOVAYA_Admin\n\n"
         "<b>🔥Начнем?👇🏻</b>"
     )
-    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg", 'rb') as photo:
-        photo = InputMediaPhoto(photo, caption=message_text)
-        try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
-                                         reply_markup=keyboard)
-        except (MessageIdentifierNotSpecified, BadRequest):
-            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
+
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg")
+    try:
+        if inline_message_id:
+            media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+        else:
+            await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+
+        if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -100,13 +107,18 @@ async def send_registration_message(chat_id, inline_message_id=None):
         "⚠️Если вы зарегистрировались, но не получили сообщение, вы можете вручную проверить свой ID\n\n"
         "🆘Если вопросы, проблемы? Обращайтесь - @ ABUZOVAYA_Admin"
     )
-    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img3.jpg", 'rb') as photo:
-        photo = InputMediaPhoto(photo, caption=message_text)
-        try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
-                                         reply_markup=keyboard)
-        except (MessageIdentifierNotSpecified, BadRequest):
-            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
+    
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img3.jpg")
+    try:
+        if inline_message_id:
+            media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+        else:
+            await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+
+        if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -127,13 +139,18 @@ async def send_instruction_message(chat_id, inline_message_id=None):
         "<b>⚠️Не рекомендуем играть больше 10 игр в день!</b>\n\n\n\n"
         "🆘Если вопросы, проблемы? Обращайтесь -\n@ABUZOVAYA_Admin"
     )
-    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img5.jpg", 'rb') as photo:
-        photo = InputMediaPhoto(photo, caption=message_text)
-        try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
-                                         reply_markup=keyboard)
-        except (MessageIdentifierNotSpecified, BadRequest):
-            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
+
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img5.jpg")
+    try:
+        if inline_message_id:
+            media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+        else:
+            await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+
+        if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -206,12 +223,19 @@ async def send_scheme_message(chat_id, stars, inline_message_id=None):
     file = BytesIO()
     image.save(file, 'PNG')
     file.seek(0)
+
+    photo = InputFile(file)
     try:
-        await bot.edit_message_media(inline_message_id=inline_message_id, media=file,
-                                     reply_markup=keyboard)
-    except (MessageIdentifierNotSpecified, BadRequest):
-        message = await bot.send_photo(chat_id, file, reply_markup=keyboard)
-        await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
+        if inline_message_id:
+            media = InputMediaPhoto(photo, parse_mode='HTML')
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+        else:
+            await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        message = await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
+
+        if message.message_id > 1:
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
 async def send_check_registration(chat_id, inline_message_id=None):
@@ -221,12 +245,17 @@ async def send_check_registration(chat_id, inline_message_id=None):
     message_text = (
         "<b>✅ Введите ID аккаунта 1win из 8 цифр:</b>"
     )
-    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img4.jpg", 'rb') as photo:
-        photo = InputMediaPhoto(photo, caption=message_text)
-        try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
-                                         reply_markup=keyboard)
-        except (MessageIdentifierNotSpecified, BadRequest):
-            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
+
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img4.jpg")
+    try:
+        if inline_message_id:
+            media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+        else:
+            await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+
+        if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
     await CreateUser.waiting_id.set()
