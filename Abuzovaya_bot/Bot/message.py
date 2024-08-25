@@ -224,9 +224,9 @@ async def send_select_coefficient_message(chat_id, type_scheme, message_id=None)
 
 
 async def send_scheme_message(chat_id, stars, message_id=None):
-    animation = InputMediaAnimation(media=open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/gif.mp4"),
-                                    caption=None)
-    await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=animation, reply_markup=None)
+    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/gif.gif", 'rb') as gif:
+        gif = InputMediaAnimation(gif, caption=None)
+        await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=gif, reply_markup=None)
 
     type_scheme = "_".join(stars.split("_")[2:])
     stars_count = int(stars.split("_")[1])
