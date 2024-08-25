@@ -2,14 +2,14 @@ from aiogram import types
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.utils.exceptions import ChatNotFound
 from aiogram.dispatcher.handler import CancelHandler
-from ..bot import bot
-from ..message import send_subscription_message
 
 CHANNEL_ID = "@ABUZOVAYA_K"
 
 
 class SubscriptionMiddleware(BaseMiddleware):
     async def on_process_message(self, message: types.Message, data: dict):
+        from Abuzovaya_bot.Bot.message import send_subscription_message
+
         if data.get('ignore_subscription'):
             return
 
@@ -18,6 +18,7 @@ class SubscriptionMiddleware(BaseMiddleware):
             raise CancelHandler()
 
     async def on_process_callback_query(self, callback_query: types.CallbackQuery, data: dict):
+        from Abuzovaya_bot.Bot.message import send_subscription_message
         if data.get('ignore_subscription'):
             return
 
@@ -28,6 +29,7 @@ class SubscriptionMiddleware(BaseMiddleware):
 
     @staticmethod
     async def check_subscription(user_id):
+        from Abuzovaya_bot.Bot.bot import bot
         try:
             member = await bot.get_chat_member(CHANNEL_ID, user_id)
             return member.is_chat_member()

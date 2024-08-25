@@ -36,8 +36,10 @@ async def check_id(message: types.Message, state: FSMContext):
         db.close()
 
 
-@dp.callback_query_handler(filters.Text(equals="check_subscription"), ignore_subscription=True)
+@dp.callback_query_handler(filters.Text(equals="check_subscription"))
 async def check_subscription(callback_query: types.CallbackQuery):
+    callback_query.conf['ignore_subscription'] = True
+
     user_id = callback_query.from_user.id
     member = await bot.get_chat_member(chat_id=channel_id, user_id=user_id)
 
