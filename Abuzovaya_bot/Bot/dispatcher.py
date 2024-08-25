@@ -96,6 +96,7 @@ async def process_scheme(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(filters.Text(equals="menu"))
 async def menu(callback_query: types.CallbackQuery):
     user_id = callback_query.from_user.id
+    await callback_query.message.answer(f"{callback_query.inline_message_id}")
     await send_main_message(user_id, inline_message_id=callback_query.inline_message_id)
 
 
