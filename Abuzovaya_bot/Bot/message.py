@@ -224,9 +224,8 @@ async def send_select_coefficient_message(chat_id, type_scheme, message_id=None)
 
 
 async def send_scheme_message(chat_id, stars, message_id=None):
-    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/gif.gif", 'rb') as gif:
-        gif = InputMediaAnimation(gif, caption=None)
-        await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=gif, reply_markup=None)
+    await bot.delete_message(chat_id, message_id)
+    message = await bot.send_message(chat_id, "💣")
 
     type_scheme = "_".join(stars.split("_")[2:])
     stars_count = int(stars.split("_")[1])
@@ -245,7 +244,8 @@ async def send_scheme_message(chat_id, stars, message_id=None):
     photo = InputFile(file)
     media = InputMediaPhoto(photo, parse_mode='HTML')
     await asyncio.sleep(3)
-    await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
+    await message.delete()
+    await bot.send_photo(chat_id=chat_id, photo=media, reply_markup=keyboard)
 
 
 async def send_check_registration(chat_id, message_id=None):
