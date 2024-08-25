@@ -1,7 +1,7 @@
 from .bot import bot
 from .States import CreateUser
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
-from aiogram.utils.exceptions import BadRequest
+from aiogram.utils.exceptions import BadRequest, MessageIdentifierNotSpecified
 from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 from io import BytesIO
 
@@ -22,7 +22,7 @@ async def send_subscription_message(chat_id, inline_message_id=None):
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
-        except BadRequest:
+        except (MessageIdentifierNotSpecified, BadRequest):
             message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -45,7 +45,7 @@ async def send_main_message(chat_id, inline_message_id=None):
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
-        except BadRequest:
+        except (MessageIdentifierNotSpecified, BadRequest):
             message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -71,7 +71,7 @@ async def send_mines_message(chat_id, inline_message_id=None):
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
-        except BadRequest:
+        except (MessageIdentifierNotSpecified, BadRequest):
             message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -97,7 +97,7 @@ async def send_registration_message(chat_id, inline_message_id=None):
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
-        except BadRequest:
+        except (MessageIdentifierNotSpecified, BadRequest):
             message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -124,7 +124,7 @@ async def send_instruction_message(chat_id, inline_message_id=None):
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
-        except BadRequest:
+        except (MessageIdentifierNotSpecified, BadRequest):
             message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -142,7 +142,7 @@ async def send_select_scheme_message(chat_id, inline_message_id=None):
     try:
         await bot.edit_message_text(inline_message_id=inline_message_id, text=message_text,
                                     reply_markup=keyboard)
-    except BadRequest:
+    except (MessageIdentifierNotSpecified, BadRequest):
         message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
         await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -179,7 +179,7 @@ async def send_select_coefficient_message(chat_id, type_scheme, inline_message_i
     try:
         await bot.edit_message_text(inline_message_id=inline_message_id, text=message_text,
                                     reply_markup=keyboard)
-    except BadRequest:
+    except (MessageIdentifierNotSpecified, BadRequest):
         message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
         await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -201,7 +201,7 @@ async def send_scheme_message(chat_id, stars, inline_message_id=None):
     try:
         await bot.edit_message_media(inline_message_id=inline_message_id, media=file,
                                      reply_markup=keyboard)
-    except BadRequest:
+    except (MessageIdentifierNotSpecified, BadRequest):
         message = await bot.send_photo(chat_id, file, reply_markup=keyboard)
         await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -218,7 +218,7 @@ async def send_check_registration(chat_id, inline_message_id=None):
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
-        except BadRequest:
+        except (MessageIdentifierNotSpecified, BadRequest):
             message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
     await CreateUser.waiting_id.set()
