@@ -224,17 +224,12 @@ async def send_scheme_message(chat_id, stars, message_id=None):
     image.save(file, 'PNG')
     file.seek(0)
 
-    try:
-        photo = InputFile(file)
-        media = InputMediaPhoto(photo, parse_mode='HTML')
-        if message_id:
-            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
-        else:
-            await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
-    except Exception as e:
-        photo = InputFile(file)
+    photo = InputFile(file)
+    media = InputMediaPhoto(photo, parse_mode='HTML')
+    if message_id:
+        await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
+    else:
         message = await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
-
         if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
