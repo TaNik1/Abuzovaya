@@ -6,7 +6,7 @@ from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 from io import BytesIO
 
 
-async def send_subscription_message(chat_id, inline_message_id=None):
+async def send_subscription_message(chat_id, message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="Подписаться👉🏻", url="https://t.me/ABUZOVAYA_K"))
     keyboard.add(InlineKeyboardButton(text="Я уже подписан✅", callback_data="check_subscription"))
@@ -20,9 +20,9 @@ async def send_subscription_message(chat_id, inline_message_id=None):
 
     photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg")
     try:
-        if inline_message_id:
+        if message_id:
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
@@ -32,7 +32,7 @@ async def send_subscription_message(chat_id, inline_message_id=None):
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_main_message(chat_id, inline_message_id=None):
+async def send_main_message(chat_id, message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=2)
     keyboard.add(InlineKeyboardButton(text="💣Mines💣", callback_data="game_mines"),
                  InlineKeyboardButton(text="🚀Coming Soon...", callback_data="coming_soon"),
@@ -48,9 +48,9 @@ async def send_main_message(chat_id, inline_message_id=None):
 
     photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img1.jpg")
     try:
-        if inline_message_id:
+        if message_id:
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_message(chat_id, "1")
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
@@ -62,7 +62,7 @@ async def send_main_message(chat_id, inline_message_id=None):
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_mines_message(chat_id, inline_message_id=None):
+async def send_mines_message(chat_id, message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="🔥Получить сигнал🔥", callback_data="scheme"))
     keyboard.add(InlineKeyboardButton(text="📜Инструкция📜", callback_data="instruction"))
@@ -81,9 +81,9 @@ async def send_mines_message(chat_id, inline_message_id=None):
 
     photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg")
     try:
-        if inline_message_id:
+        if message_id:
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
@@ -93,7 +93,7 @@ async def send_mines_message(chat_id, inline_message_id=None):
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_registration_message(chat_id, inline_message_id=None):
+async def send_registration_message(chat_id, message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="💻1WIN💻", url="https://1wcght.life/casino/list?open=register&p=cnk5"))
     keyboard.add(InlineKeyboardButton(text="🔍Проверить ID🔍", callback_data="check_registration"))
@@ -112,9 +112,9 @@ async def send_registration_message(chat_id, inline_message_id=None):
 
     photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img3.jpg")
     try:
-        if inline_message_id:
+        if message_id:
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
@@ -124,7 +124,7 @@ async def send_registration_message(chat_id, inline_message_id=None):
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_instruction_message(chat_id, inline_message_id=None):
+async def send_instruction_message(chat_id, message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
     message_text = (
@@ -144,9 +144,9 @@ async def send_instruction_message(chat_id, inline_message_id=None):
 
     photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img5.jpg")
     try:
-        if inline_message_id:
+        if message_id:
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
@@ -156,7 +156,7 @@ async def send_instruction_message(chat_id, inline_message_id=None):
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_select_scheme_message(chat_id, inline_message_id=None):
+async def send_select_scheme_message(chat_id, message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="1💣", callback_data="mine_1"))
     keyboard.add(InlineKeyboardButton(text="3💣", callback_data="mine_3"))
@@ -167,14 +167,14 @@ async def send_select_scheme_message(chat_id, inline_message_id=None):
         "<b>✅Выберите кол-во мин:</b>"
     )
     try:
-        await bot.edit_message_text(inline_message_id=inline_message_id, text=message_text,
+        await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=message_text,
                                     reply_markup=keyboard)
     except (MessageIdentifierNotSpecified, BadRequest):
         message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
         await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_select_coefficient_message(chat_id, type_scheme, inline_message_id=None):
+async def send_select_coefficient_message(chat_id, type_scheme, message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=5)
     if type_scheme[-1] == "1":
         keyboard.add(InlineKeyboardButton(text="1.84💯", callback_data='stars_12_' + type_scheme),
@@ -204,14 +204,14 @@ async def send_select_coefficient_message(chat_id, type_scheme, inline_message_i
     )
 
     try:
-        await bot.edit_message_text(inline_message_id=inline_message_id, text=message_text,
+        await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=message_text,
                                     reply_markup=keyboard)
     except (MessageIdentifierNotSpecified, BadRequest):
         message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
         await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_scheme_message(chat_id, stars, inline_message_id=None):
+async def send_scheme_message(chat_id, stars, message_id=None):
     type_scheme = "_".join(stars.split("_")[2:])
     stars_count = int(stars.split("_")[1])
 
@@ -228,9 +228,9 @@ async def send_scheme_message(chat_id, stars, inline_message_id=None):
 
     photo = InputFile(file)
     try:
-        if inline_message_id:
+        if message_id:
             media = InputMediaPhoto(photo, parse_mode='HTML')
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
@@ -240,7 +240,7 @@ async def send_scheme_message(chat_id, stars, inline_message_id=None):
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_check_registration(chat_id, inline_message_id=None):
+async def send_check_registration(chat_id, message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
 
@@ -250,9 +250,9 @@ async def send_check_registration(chat_id, inline_message_id=None):
 
     photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img4.jpg")
     try:
-        if inline_message_id:
+        if message_id:
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
