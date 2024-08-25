@@ -112,7 +112,7 @@ async def process_stars_selection(callback_query: types.CallbackQuery):
     if callback_query.message.text:
         await send_scheme_message(user_id, callback_query.data)
     else:
-        await send_scheme_message(user_id, message_id=callback_query.message.message_id)
+        await send_scheme_message(user_id, callback_query.data, message_id=callback_query.message.message_id)
 
 
 @dp.callback_query_handler(filters.Text(equals="game_mines"))
