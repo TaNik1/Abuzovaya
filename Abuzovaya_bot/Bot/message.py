@@ -242,10 +242,9 @@ async def send_scheme_message(chat_id, stars, message_id=None):
     file.seek(0)
 
     photo = InputFile(file)
-    media = InputMediaPhoto(photo, parse_mode='HTML')
-    await asyncio.sleep(3)
+    await asyncio.sleep(1.5)
     await message.delete()
-    await bot.send_photo(chat_id=chat_id, photo=media, reply_markup=keyboard)
+    await bot.send_photo(chat_id=chat_id, photo=photo, reply_markup=keyboard)
 
 
 async def send_check_registration(chat_id, message_id=None):
