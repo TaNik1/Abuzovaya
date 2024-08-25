@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher import filters
 
 from DataBase.database import SessionLocal
-# from DataBase.models import Item
+from DataBase.models import Item
 from .bot import dp
 from .config import channel_id
 from .message import *
