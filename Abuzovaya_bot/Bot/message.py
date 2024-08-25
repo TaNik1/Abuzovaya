@@ -107,7 +107,7 @@ async def send_registration_message(chat_id, inline_message_id=None):
         "⚠️Если вы зарегистрировались, но не получили сообщение, вы можете вручную проверить свой ID\n\n"
         "🆘Если вопросы, проблемы? Обращайтесь - @ ABUZOVAYA_Admin"
     )
-    
+
     photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img3.jpg")
     try:
         if inline_message_id:
