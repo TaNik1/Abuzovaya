@@ -162,7 +162,6 @@ async def send_select_scheme_message(chat_id, message_id=None):
     keyboard.add(InlineKeyboardButton(text="3💣", callback_data="mine_3"))
     keyboard.add(InlineKeyboardButton(text="5💣", callback_data="mine_5"))
     keyboard.add(InlineKeyboardButton(text="7💣", callback_data="mine_7"))
-    keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
 
     message_text = (
         "<b>✅Выберите кол-во мин:</b>"
@@ -198,8 +197,6 @@ async def send_select_coefficient_message(chat_id, type_scheme, message_id=None)
         keyboard.add(InlineKeyboardButton(text="1.86💯", callback_data='stars_2_' + type_scheme),
                      InlineKeyboardButton(text="2.68💯", callback_data='stars_3_' + type_scheme))
     keyboard.add(InlineKeyboardButton(text="💣Изменить кол-во мин💣", callback_data="scheme"))
-    keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
-
     message_text = (
         f"<b>✅Выберите желаемый коэффициент ({type_scheme[-1]}x💣)</b>"
     )
@@ -235,12 +232,7 @@ async def send_scheme_message(chat_id, stars, message_id=None):
         else:
             await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
     except Exception as e:
-        image = GridGenerator(stars_count).generate_grid()
-        file = BytesIO()
-        image.save(file, 'PNG')
-        file.seek(0)
         photo = InputFile(file)
-        photo = InputMediaPhoto(photo, parse_mode='HTML')
         message = await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
 
         if message.message_id > 1:
