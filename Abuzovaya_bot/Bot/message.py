@@ -1,6 +1,6 @@
 from .bot import bot
 from .States import CreateUser
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
 from aiogram.utils.exceptions import BadRequest
 from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 import aiofiles
@@ -19,11 +19,12 @@ async def send_subscription_message(chat_id, inline_message_id=None):
         "👉🏻@ABUZOVAYA_K\n"
     )
     async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg", 'rb') as photo:
+        photo = InputMediaPhoto(photo, caption=message_text)
         try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
         except BadRequest:
-            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -41,11 +42,12 @@ async def send_main_message(chat_id, inline_message_id=None):
         "🎮 Выберите Игру 🎮"
     )
     async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img1.jpg", 'rb') as photo:
+        photo = InputMediaPhoto(photo, caption=message_text)
         try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
         except BadRequest:
-            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -66,11 +68,12 @@ async def send_mines_message(chat_id, inline_message_id=None):
         "<b>🔥Начнем?👇🏻</b>"
     )
     async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg", 'rb') as photo:
+        photo = InputMediaPhoto(photo, caption=message_text)
         try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
         except BadRequest:
-            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -91,11 +94,12 @@ async def send_registration_message(chat_id, inline_message_id=None):
         "🆘Если вопросы, проблемы? Обращайтесь - @ ABUZOVAYA_Admin"
     )
     async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img3.jpg", 'rb') as photo:
+        photo = InputMediaPhoto(photo, caption=message_text)
         try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
         except BadRequest:
-            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -117,11 +121,12 @@ async def send_instruction_message(chat_id, inline_message_id=None):
         "🆘Если вопросы, проблемы? Обращайтесь -\n@ABUZOVAYA_Admin"
     )
     async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img5.jpg", 'rb') as photo:
+        photo = InputMediaPhoto(photo, caption=message_text)
         try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
         except BadRequest:
-            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
@@ -135,7 +140,6 @@ async def send_select_scheme_message(chat_id, inline_message_id=None):
     message_text = (
         "<b>✅Выберите кол-во мин:</b>"
     )
-    message = await bot.send_message(chat_id, message_text, reply_markup=keyboard)
     try:
         await bot.edit_message_text(inline_message_id=inline_message_id, text=message_text,
                                     reply_markup=keyboard)
@@ -211,10 +215,11 @@ async def send_check_registration(chat_id, inline_message_id=None):
         "<b>✅ Введите ID аккаунта 1win из 8 цифр:</b>"
     )
     async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img4.jpg", 'rb') as photo:
+        photo = InputMediaPhoto(photo, caption=message_text)
         try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
         except BadRequest:
-            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
     await CreateUser.waiting_id.set()
