@@ -86,7 +86,7 @@ async def process_scheme(callback_query: types.CallbackQuery):
     try:
         user = db.query(Item).filter(Item.tg_id == user_id).first()
         if user is None:
-            await bot.answer_callback_query(callback_query.id, "Сначала пройдите регистрацию", show_alert=True)
+            await send_registration_message(user_id, message_id=callback_query.message.message_id)
         else:
             await send_select_scheme_message(user_id, message_id=callback_query.message.message_id)
     finally:

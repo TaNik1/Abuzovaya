@@ -1,6 +1,8 @@
+import asyncio
+
 from .bot import bot
 from .States import CreateUser
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, InputFile
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, InputFile, InputMediaAnimation
 from aiogram.utils.exceptions import BadRequest, MessageIdentifierNotSpecified
 from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 from io import BytesIO
@@ -166,12 +168,18 @@ async def send_select_scheme_message(chat_id, message_id=None):
     message_text = (
         "<b>✅Выберите кол-во мин:</b>"
     )
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img7.jpg")
     try:
-        await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=message_text,
-                                    reply_markup=keyboard)
-    except (MessageIdentifierNotSpecified, BadRequest):
-        message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
-        await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
+        if message_id:
+            media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
+        else:
+            await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+
+        if message.message_id > 1:
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
 async def send_select_coefficient_message(chat_id, type_scheme, message_id=None):
@@ -201,15 +209,25 @@ async def send_select_coefficient_message(chat_id, type_scheme, message_id=None)
         f"<b>✅Выберите желаемый коэффициент ({type_scheme[-1]}x💣)</b>"
     )
 
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img7.jpg")
     try:
-        await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=message_text,
-                                    reply_markup=keyboard)
-    except (MessageIdentifierNotSpecified, BadRequest):
-        message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
-        await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
+        if message_id:
+            media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
+            await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
+        else:
+            await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+
+        if message.message_id > 1:
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
 async def send_scheme_message(chat_id, stars, message_id=None):
+    animation = InputMediaAnimation(media=open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/gif.mp4"),
+                                    caption=None)
+    await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=animation, reply_markup=None)
+
     type_scheme = "_".join(stars.split("_")[2:])
     stars_count = int(stars.split("_")[1])
 
@@ -226,12 +244,8 @@ async def send_scheme_message(chat_id, stars, message_id=None):
 
     photo = InputFile(file)
     media = InputMediaPhoto(photo, parse_mode='HTML')
-    if message_id:
-        await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
-    else:
-        message = await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
-        if message.message_id > 1:
-            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
+    await asyncio.sleep(3)
+    await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
 
 
 async def send_check_registration(chat_id, message_id=None):
