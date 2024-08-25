@@ -20,7 +20,7 @@ class SubscriptionMiddleware(BaseMiddleware):
 
         if not await self.check_subscription(callback_query.from_user.id):
             await send_subscription_message(chat_id=callback_query.from_user.id,
-                                            inline_message_id=callback_query.inline_message_id)
+                                            message_id=callback_query.message.message_id)
             raise CancelHandler()
 
     @staticmethod

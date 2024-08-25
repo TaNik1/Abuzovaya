@@ -227,7 +227,7 @@ async def send_scheme_message(chat_id, stars, message_id=None):
     photo = InputFile(file)
     media = InputMediaPhoto(photo, parse_mode='HTML')
     if message_id:
-        await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
+        await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=photo, reply_markup=keyboard)
     else:
         message = await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
         if message.message_id > 1:
