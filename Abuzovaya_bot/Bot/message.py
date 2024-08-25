@@ -183,7 +183,7 @@ async def send_select_scheme_message(chat_id, message_id=None):
 
 
 async def send_select_coefficient_message(chat_id, type_scheme, message_id=None):
-    keyboard = InlineKeyboardMarkup(row_width=5)
+    keyboard = InlineKeyboardMarkup(row_width=4)
     if type_scheme[-1] == "1":
         keyboard.add(InlineKeyboardButton(text="1.84💯", callback_data='stars_12_' + type_scheme),
                      InlineKeyboardButton(text="1.99💯", callback_data='stars_13_' + type_scheme),
