@@ -244,7 +244,6 @@ async def send_scheme_message(chat_id, stars, message_id=None):
 
     photo = InputFile(file)
     media = InputMediaPhoto(photo, parse_mode='HTML')
-    await asyncio.sleep(3)
     await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
 
 
