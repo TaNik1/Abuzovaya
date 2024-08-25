@@ -16,7 +16,7 @@ def get_db():
 
 @app.get("/{id}")
 async def read_item(id: int, db: Session = Depends(get_db)):
-    new_item = Item(value=id)
+    new_item = Item(onewin_id=id)
     db.add(new_item)
     db.commit()
     db.refresh(new_item)
@@ -26,4 +26,4 @@ async def read_item(id: int, db: Session = Depends(get_db)):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=3389)

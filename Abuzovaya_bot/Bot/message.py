@@ -1,44 +1,55 @@
 from .bot import bot
 from .States import CreateUser
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.utils.exceptions import BadRequest
 from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 import aiofiles
 from io import BytesIO
 
 
-async def send_start_message(chat_id):
+async def send_subscription_message(chat_id, inline_message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
-    keyboard.add(InlineKeyboardButton(text="Подписаться👉🏻", url="https://t.me/+NBZaJjasSl02MmY6"))
+    keyboard.add(InlineKeyboardButton(text="Подписаться👉🏻", url="https://t.me/ABUZOVAYA_K"))
     keyboard.add(InlineKeyboardButton(text="Я уже подписан✅", callback_data="check_subscription"))
 
     message_text = (
-        "<b>👇🏻Подпишись на канал, что бы продолжить👇🏻</b>\n\n"
-        "https://t.me/+NBZaJjasSl02MmY6\n"
-        "https://t.me/+NBZaJjasSl02MmY6\n"
-        "https://t.me/+NBZaJjasSl02MmY6\n"
+        "<b>⚠️ Для использования Бота, нужно быть подписаным на наш канал с новостями ⚠️</b>\n\n"
+        "👉🏻@ABUZOVAYA_K\n"
+        "👉🏻@ABUZOVAYA_K\n"
+        "👉🏻@ABUZOVAYA_K\n"
     )
-    async with aiofiles.open("../src/image/img6.jpg", 'rb') as photo:
-        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg", 'rb') as photo:
+        try:
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+                                         reply_markup=keyboard)
+        except BadRequest:
+            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_main_message(chat_id):
+async def send_main_message(chat_id, inline_message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=3)
     keyboard.add(InlineKeyboardButton(text="💣Mines💣", callback_data="game_mines"),
                  InlineKeyboardButton(text="🚀Coming Soon...", callback_data="coming_soon"),
-                 InlineKeyboardButton(text="🚀⭕️Coming Soon...", callback_data="coming_soon"),
-                 InlineKeyboardButton(text="🚀⭕️Coming Soon...", callback_data="coming_soon"),
-                 InlineKeyboardButton(text="🚀⭕️Coming Soon...", callback_data="coming_soon"),
-                 InlineKeyboardButton(text="🚀⭕️Coming Soon...", callback_data="coming_soon")
+                 InlineKeyboardButton(text="⭕️Coming Soon...", callback_data="coming_soon"),
+                 InlineKeyboardButton(text="⭕️Coming Soon...", callback_data="coming_soon"),
+                 InlineKeyboardButton(text="⭕️Coming Soon...", callback_data="coming_soon"),
+                 InlineKeyboardButton(text="⭕️Coming Soon...", callback_data="coming_soon")
                  )
 
     message_text = (
         "🎮 Выберите Игру 🎮"
     )
-    async with aiofiles.open("../src/image/img1.jpg", 'rb') as photo:
-        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img1.jpg", 'rb') as photo:
+        try:
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+                                         reply_markup=keyboard)
+        except BadRequest:
+            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_mines_message(chat_id):
+async def send_mines_message(chat_id, inline_message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="🔥Получить сигнал🔥", callback_data="scheme"))
     keyboard.add(InlineKeyboardButton(text="📜Инструкция📜", callback_data="instruction"))
@@ -54,18 +65,24 @@ async def send_mines_message(chat_id):
         "🆘Есть вопрос? Ответим - @ABUZOVAYA_Admin\n\n"
         "<b>🔥Начнем?👇🏻</b>"
     )
-    async with aiofiles.open("../src/image/img2.jpg", 'rb') as photo:
-        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg", 'rb') as photo:
+        try:
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+                                         reply_markup=keyboard)
+        except BadRequest:
+            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_registration_message(chat_id):
+async def send_registration_message(chat_id, inline_message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="💻1WIN💻", url="https://1wcght.life/casino/list?open=register&p=cnk5"))
     keyboard.add(InlineKeyboardButton(text="🔍Проверить ID🔍", callback_data="check_registration"))
     keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
     message_text = (
         "<b>💻Регистрация 1win💻</b>\n\n"
-        "1️⃣Для начала зарегистрируйтесь на сайте, нажав на кнопку\n<b>💻1WIN💻</b>\n"
+        "1️⃣Для начала зарегистрируйтесь на сайте, нажав на кнопку\n<a "
+        "href='https://1wcght.life/casino/list?open=register&p=cnk5'><b>💻1WIN💻</b></a>\n"
         "⚠️Для работы Боту нужен Новый Аккаунт 1win, что бы иметь доступ к внутренней статистике системы\n\n"
         "2️⃣Введите промокод ABUZOVAYA, он даст вам +500 % к первому депозиту\n\n"
         "3️⃣После успешной регистрации - ваша учетная запись будет автоматически проверена системой, "
@@ -73,11 +90,16 @@ async def send_registration_message(chat_id):
         "⚠️Если вы зарегистрировались, но не получили сообщение, вы можете вручную проверить свой ID\n\n"
         "🆘Если вопросы, проблемы? Обращайтесь - @ ABUZOVAYA_Admin"
     )
-    async with aiofiles.open("../src/image/img3.jpg", 'rb') as photo:
-        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img3.jpg", 'rb') as photo:
+        try:
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+                                         reply_markup=keyboard)
+        except BadRequest:
+            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_instruction_message(chat_id):
+async def send_instruction_message(chat_id, inline_message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
     message_text = (
@@ -94,11 +116,16 @@ async def send_instruction_message(chat_id):
         "<b>⚠️Не рекомендуем играть больше 10 игр в день!</b>\n\n\n\n"
         "🆘Если вопросы, проблемы? Обращайтесь -\n@ABUZOVAYA_Admin"
     )
-    async with aiofiles.open("../src/image/img5.jpg", 'rb') as photo:
-        await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img5.jpg", 'rb') as photo:
+        try:
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+                                         reply_markup=keyboard)
+        except BadRequest:
+            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_select_scheme_message(chat_id):
+async def send_select_scheme_message(chat_id, inline_message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(InlineKeyboardButton(text="1💣", callback_data="mine_1"))
     keyboard.add(InlineKeyboardButton(text="3💣", callback_data="mine_3"))
@@ -108,10 +135,16 @@ async def send_select_scheme_message(chat_id):
     message_text = (
         "<b>✅Выберите кол-во мин:</b>"
     )
-    await bot.send_message(chat_id, message_text, reply_markup=keyboard)
+    message = await bot.send_message(chat_id, message_text, reply_markup=keyboard)
+    try:
+        await bot.edit_message_text(inline_message_id=inline_message_id, text=message_text,
+                                    reply_markup=keyboard)
+    except BadRequest:
+        message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
+        await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_select_coefficient_message(chat_id, type_scheme):
+async def send_select_coefficient_message(chat_id, type_scheme, inline_message_id=None):
     keyboard = InlineKeyboardMarkup(row_width=5)
     if type_scheme[-1] == "1":
         keyboard.add(InlineKeyboardButton(text="1.84💯", callback_data='stars_12_' + type_scheme),
@@ -140,10 +173,15 @@ async def send_select_coefficient_message(chat_id, type_scheme):
         f"<b>✅Выберите желаемый коэффициент ({type_scheme[-1]}x💣)</b>"
     )
 
-    await bot.send_message(chat_id, message_text, reply_markup=keyboard)
+    try:
+        await bot.edit_message_text(inline_message_id=inline_message_id, text=message_text,
+                                    reply_markup=keyboard)
+    except BadRequest:
+        message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
+        await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_scheme_message(chat_id, stars):
+async def send_scheme_message(chat_id, stars, inline_message_id=None):
     type_scheme = "_".join(stars.split("_")[2:])
     stars_count = int(stars.split("_")[1])
 
@@ -157,13 +195,26 @@ async def send_scheme_message(chat_id, stars):
     file = BytesIO()
     image.save(file, 'PNG')
     file.seek(0)
-    await bot.send_photo(chat_id, file, reply_markup=keyboard)
+    try:
+        await bot.edit_message_media(inline_message_id=inline_message_id, media=file,
+                                     reply_markup=keyboard)
+    except BadRequest:
+        message = await bot.send_photo(chat_id, file, reply_markup=keyboard)
+        await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
-async def send_check_registration(chat_id):
+async def send_check_registration(chat_id, inline_message_id=None):
+    keyboard = InlineKeyboardMarkup(row_width=1)
+    keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
+
     message_text = (
         "<b>✅ Введите ID аккаунта 1win из 8 цифр:</b>"
     )
-    async with aiofiles.open("../src/image/img4.jpg", 'rb') as photo:
-        await bot.send_photo(chat_id, photo, caption=message_text)
+    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img4.jpg", 'rb') as photo:
+        try:
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo, caption=message_text,
+                                         reply_markup=keyboard)
+        except BadRequest:
+            message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard)
+            await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
     await CreateUser.waiting_id.set()
