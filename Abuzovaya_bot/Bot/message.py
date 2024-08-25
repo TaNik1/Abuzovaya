@@ -1,6 +1,6 @@
 from .bot import bot
 from .States import CreateUser
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, InputFile
 from aiogram.utils.exceptions import BadRequest, MessageIdentifierNotSpecified
 from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 from io import BytesIO
@@ -17,13 +17,21 @@ async def send_subscription_message(chat_id, inline_message_id=None):
         "👉🏻@ABUZOVAYA_K\n"
         "👉🏻@ABUZOVAYA_K\n"
     )
-    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg", 'rb') as photo:
-        photo = InputMediaPhoto(photo, caption=message_text)
-        try:
-            await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
-                                         reply_markup=keyboard)
-        except (MessageIdentifierNotSpecified, BadRequest):
-            message = await bot.send_photo(chat_id, photo, reply_markup=keyboard)
+    photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg")
+
+    try:
+        if inline_message_id:
+            media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
+            await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
+        else:
+            # Если inline_message_id не передан, просто отправляем новое сообщение
+            await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        # Если редактирование не удалось, отправляем новое фото
+        message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+
+        # Удаляем предыдущее сообщение, если оно существует
+        if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
 
