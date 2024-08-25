@@ -52,11 +52,9 @@ async def send_main_message(chat_id, message_id=None):
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
-            await bot.send_message(chat_id, "1")
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
-        await bot.send_message(chat_id, "2")
 
         if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
@@ -162,6 +160,7 @@ async def send_select_scheme_message(chat_id, message_id=None):
     keyboard.add(InlineKeyboardButton(text="3💣", callback_data="mine_3"))
     keyboard.add(InlineKeyboardButton(text="5💣", callback_data="mine_5"))
     keyboard.add(InlineKeyboardButton(text="7💣", callback_data="mine_7"))
+    keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
 
     message_text = (
         "<b>✅Выберите кол-во мин:</b>"
@@ -197,7 +196,7 @@ async def send_select_coefficient_message(chat_id, type_scheme, message_id=None)
         keyboard.add(InlineKeyboardButton(text="1.86💯", callback_data='stars_2_' + type_scheme),
                      InlineKeyboardButton(text="2.68💯", callback_data='stars_3_' + type_scheme))
     keyboard.add(InlineKeyboardButton(text="💣Изменить кол-во мин💣", callback_data="scheme"))
-    keyboard.add(InlineKeyboardButton(text="📌МЕНЮ📌", callback_data="menu"))
+    keyboard.add(InlineKeyboardButton(text="👈🏻Вернуться👈🏻", callback_data="game_mines"))
 
     message_text = (
         f"<b>✅Выберите желаемый коэффициент ({type_scheme[-1]}x💣)</b>"
@@ -219,7 +218,7 @@ async def send_scheme_message(chat_id, stars, message_id=None):
     keyboard.add(InlineKeyboardButton(text="🔥Новый сигнал🔥", callback_data=stars))
     keyboard.add(InlineKeyboardButton(text="💣Изменить кол-во мин💣", callback_data="scheme"))
     keyboard.add(InlineKeyboardButton(text="💯Изменить коэффициент💯", callback_data=type_scheme))
-    keyboard.add(InlineKeyboardButton(text="🚫EXIT🚫", callback_data="menu"))
+    keyboard.add(InlineKeyboardButton(text="🚫EXIT🚫", callback_data="game_mines"))
 
     image = GridGenerator(stars_count).generate_grid()
     file = BytesIO()
@@ -227,9 +226,9 @@ async def send_scheme_message(chat_id, stars, message_id=None):
     file.seek(0)
 
     photo = InputFile(file)
+    media = InputMediaPhoto(photo, parse_mode='HTML')
     try:
         if message_id:
-            media = InputMediaPhoto(photo, parse_mode='HTML')
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
