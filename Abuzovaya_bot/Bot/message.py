@@ -235,6 +235,10 @@ async def send_scheme_message(chat_id, stars, message_id=None):
         else:
             await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
+        image = GridGenerator(stars_count).generate_grid()
+        file = BytesIO()
+        image.save(file, 'PNG')
+        file.seek(0)
         photo = InputFile(file)
         photo = InputMediaPhoto(photo, parse_mode='HTML')
         message = await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
