@@ -1,6 +1,6 @@
 from .bot import bot
 from .States import CreateUser
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMedia
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
 from aiogram.utils.exceptions import BadRequest
 from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 from io import BytesIO
@@ -18,7 +18,7 @@ async def send_subscription_message(chat_id, inline_message_id=None):
         "👉🏻@ABUZOVAYA_K\n"
     )
     with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg", 'rb') as photo:
-        photo = InputMedia(photo, caption=message_text)
+        photo = InputMediaPhoto(photo, caption=message_text)
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
                                          reply_markup=keyboard)
