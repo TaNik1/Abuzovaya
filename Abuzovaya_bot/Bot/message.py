@@ -25,7 +25,7 @@ async def send_subscription_message(chat_id, message_id=None):
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
 
         if message.message_id > 1:
@@ -53,7 +53,7 @@ async def send_main_message(chat_id, message_id=None):
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
 
         if message.message_id > 1:
@@ -80,11 +80,13 @@ async def send_mines_message(chat_id, message_id=None):
     photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg")
     try:
         if message_id:
+            photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg")
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        photo = InputFile("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg")
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
 
         if message.message_id > 1:
@@ -115,7 +117,7 @@ async def send_registration_message(chat_id, message_id=None):
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
 
         if message.message_id > 1:
@@ -147,7 +149,7 @@ async def send_instruction_message(chat_id, message_id=None):
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
 
         if message.message_id > 1:
@@ -168,7 +170,7 @@ async def send_select_scheme_message(chat_id, message_id=None):
     try:
         await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=message_text,
                                     reply_markup=keyboard)
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest):
         message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
         await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -205,7 +207,7 @@ async def send_select_coefficient_message(chat_id, type_scheme, message_id=None)
     try:
         await bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=message_text,
                                     reply_markup=keyboard)
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest):
         message = await bot.send_message(chat_id, text=message_text, reply_markup=keyboard)
         await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
 
@@ -225,14 +227,16 @@ async def send_scheme_message(chat_id, stars, message_id=None):
     image.save(file, 'PNG')
     file.seek(0)
 
-    photo = InputFile(file)
-    media = InputMediaPhoto(photo, parse_mode='HTML')
     try:
+        photo = InputFile(file)
+        media = InputMediaPhoto(photo, parse_mode='HTML')
         if message_id:
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
+        photo = InputFile(file)
+        photo = InputMediaPhoto(photo, parse_mode='HTML')
         message = await bot.send_photo(chat_id, photo, reply_markup=keyboard, parse_mode='HTML')
 
         if message.message_id > 1:
@@ -254,7 +258,7 @@ async def send_check_registration(chat_id, message_id=None):
             await bot.edit_message_media(chat_id=chat_id, message_id=message_id, media=media, reply_markup=keyboard)
         else:
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
-    except Exception as e:
+    except (MessageIdentifierNotSpecified, BadRequest) as e:
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
 
         if message.message_id > 1:
