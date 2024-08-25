@@ -3,7 +3,6 @@ from .States import CreateUser
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
 from aiogram.utils.exceptions import BadRequest
 from Abuzovaya_bot.utils.GridGenerator import GridGenerator
-import aiofiles
 from io import BytesIO
 
 
@@ -18,7 +17,7 @@ async def send_subscription_message(chat_id, inline_message_id=None):
         "👉🏻@ABUZOVAYA_K\n"
         "👉🏻@ABUZOVAYA_K\n"
     )
-    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg", 'rb') as photo:
+    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img6.jpg", 'rb') as photo:
         photo = InputMediaPhoto(photo, caption=message_text)
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
@@ -41,7 +40,7 @@ async def send_main_message(chat_id, inline_message_id=None):
     message_text = (
         "🎮 Выберите Игру 🎮"
     )
-    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img1.jpg", 'rb') as photo:
+    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img1.jpg", 'rb') as photo:
         photo = InputMediaPhoto(photo, caption=message_text)
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
@@ -67,7 +66,7 @@ async def send_mines_message(chat_id, inline_message_id=None):
         "🆘Есть вопрос? Ответим - @ABUZOVAYA_Admin\n\n"
         "<b>🔥Начнем?👇🏻</b>"
     )
-    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg", 'rb') as photo:
+    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img2.jpg", 'rb') as photo:
         photo = InputMediaPhoto(photo, caption=message_text)
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
@@ -93,7 +92,7 @@ async def send_registration_message(chat_id, inline_message_id=None):
         "⚠️Если вы зарегистрировались, но не получили сообщение, вы можете вручную проверить свой ID\n\n"
         "🆘Если вопросы, проблемы? Обращайтесь - @ ABUZOVAYA_Admin"
     )
-    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img3.jpg", 'rb') as photo:
+    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img3.jpg", 'rb') as photo:
         photo = InputMediaPhoto(photo, caption=message_text)
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
@@ -120,7 +119,7 @@ async def send_instruction_message(chat_id, inline_message_id=None):
         "<b>⚠️Не рекомендуем играть больше 10 игр в день!</b>\n\n\n\n"
         "🆘Если вопросы, проблемы? Обращайтесь -\n@ABUZOVAYA_Admin"
     )
-    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img5.jpg", 'rb') as photo:
+    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img5.jpg", 'rb') as photo:
         photo = InputMediaPhoto(photo, caption=message_text)
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
@@ -214,7 +213,7 @@ async def send_check_registration(chat_id, inline_message_id=None):
     message_text = (
         "<b>✅ Введите ID аккаунта 1win из 8 цифр:</b>"
     )
-    async with aiofiles.open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img4.jpg", 'rb') as photo:
+    with open("/home/nikitat612006/d/Abuzovaya/Abuzovaya_bot/src/image/img4.jpg", 'rb') as photo:
         photo = InputMediaPhoto(photo, caption=message_text)
         try:
             await bot.edit_message_media(inline_message_id=inline_message_id, media=photo,
