@@ -33,7 +33,7 @@ async def send_subscription_message(chat_id, inline_message_id=None):
 
 
 async def send_main_message(chat_id, inline_message_id=None):
-    keyboard = InlineKeyboardMarkup(row_width=3)
+    keyboard = InlineKeyboardMarkup(row_width=2)
     keyboard.add(InlineKeyboardButton(text="💣Mines💣", callback_data="game_mines"),
                  InlineKeyboardButton(text="🚀Coming Soon...", callback_data="coming_soon"),
                  InlineKeyboardButton(text="⭕️Coming Soon...", callback_data="coming_soon"),
@@ -52,9 +52,11 @@ async def send_main_message(chat_id, inline_message_id=None):
             media = InputMediaPhoto(photo, caption=message_text, parse_mode='HTML')
             await bot.edit_message_media(inline_message_id=inline_message_id, media=media, reply_markup=keyboard)
         else:
+            await bot.send_message(chat_id, "1")
             await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
     except (MessageIdentifierNotSpecified, BadRequest) as e:
         message = await bot.send_photo(chat_id, photo, caption=message_text, reply_markup=keyboard, parse_mode='HTML')
+        await bot.send_message(chat_id, "2")
 
         if message.message_id > 1:
             await bot.delete_message(chat_id=chat_id, message_id=message.message_id - 1)
