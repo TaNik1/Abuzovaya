@@ -3,7 +3,7 @@ import asyncio
 from .bot import bot
 from .States import CreateUser
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, InputFile, InputMediaAnimation
-from aiogram.utils.exceptions import BadRequest, MessageIdentifierNotSpecified
+from aiogram.utils.exceptions import BadRequest, MessageIdentifierNotSpecified, MessageCantBeDeleted
 from Abuzovaya_bot.utils.GridGenerator import GridGenerator
 from io import BytesIO
 
@@ -224,7 +224,10 @@ async def send_select_coefficient_message(chat_id, type_scheme, message_id=None)
 
 
 async def send_scheme_message(chat_id, stars, message_id=None):
-    await bot.delete_message(chat_id, message_id)
+    try:
+        await bot.delete_message(chat_id, message_id)
+    except MessageCantBeDeleted:
+        await bot.edit_message_reply_markup(chat_id, message_id, reply_markup=None)
     message = await bot.send_message(chat_id, "💣")
 
     type_scheme = "_".join(stars.split("_")[2:])
